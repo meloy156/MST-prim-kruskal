@@ -1,0 +1,67 @@
+# ===== Исполняемые файлы =====
+*.exe
+*.out
+a.out
+laba2
+3main
+*.dll
+*.so
+*.dylib
+
+# ===== Объектные файлы и результаты компиляции =====
+*.o
+*.obj
+*.gch          # предкомпилированные заголовки
+*.pch
+*.ilk
+*.pdb
+
+# ===== Отладочная информация =====
+*.dSYM/
+*.su
+*.idb
+
+# ===== Временные файлы компилятора =====
+*.i
+*.s
+*.tmp
+
+# ===== Логи =====
+*.log
+
+# ===== Папки сборки =====
+build/
+build-*/
+out/
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# ===== Файлы IDE / редакторов =====
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.vcxproj.user
+CMakeUserPresets.json
+
+# ===== CMake (если начнёте использовать) =====
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+
+# ===== Системный мусор =====
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ===== Временные файлы редакторов =====
+*~
+*.swp
+*.swo
