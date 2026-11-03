@@ -14,6 +14,8 @@ struct Edge
       , weight(weight)
     {}
 
+    bool operator<(const Edge& other) const;
+
     void to_stream(std::ostream& os) const;
 };
 

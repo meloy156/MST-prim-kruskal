@@ -9,6 +9,10 @@ void Edge::to_stream(std::ostream& os) const {
         << "}, ";
 }
 
+bool Edge::operator<(const Edge& other) const {
+    return this->weight < other.weight;
+}
+
 
 Graph_for_Kruskal::Graph_for_Kruskal(int count_vertex)
   : count_vertex(count_vertex), edges()
@@ -46,7 +50,7 @@ const std::vector<Edge>& Graph_for_Kruskal::get_edges() const {
 
 
 void Graph_for_Kruskal::print_edges() const {
-    std::cout << "|||Всего ребере в графе: " << return_count_edge() << "|||" << std::endl;
+    std::cout << "|||Всего ребер в графе: " << return_count_edge() << "|||" << std::endl;
     std::cout << "{1 вершина, 2 вершина, вес}" << std::endl;
 
     for (const auto& e : edges) {

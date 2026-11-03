@@ -64,6 +64,8 @@ void Graph_for_Primo::print_vertexs() const {
     for (const auto& i : vertices) {
         i.to_stream(std::cout);
     }
+
+    std::cout << std::endl;
 }
 
 
