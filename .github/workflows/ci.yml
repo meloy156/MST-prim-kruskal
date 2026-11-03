@@ -1,0 +1,42 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build-laba-4:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build laba_4
+        working-directory: laba_4
+        run: |
+          g++ -std=c++20 -I. -IPrimo -IKruskal -Wall -Wextra \
+            main_for_4.cpp \
+            Primo/Graph_for_Primo.cpp \
+            Primo/method_Prima.cpp \
+            Kruskal/Graph_for_Kruskal.cpp \
+            Kruskal/method_Kruskala.cpp \
+            Kruskal/DSU.cpp \
+            -o program.exe
+
+  build-laba-3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if laba_3 exists
+        id: check
+        run: |
+          if [ -d laba_3 ]; then echo "exists=true" >> $GITHUB_OUTPUT; else echo "exists=false" >> $GITHUB_OUTPUT; fi
+
+      - name: Build laba_3
+        if: steps.check.outputs.exists == 'true'
+        working-directory: laba_3
+        run: |
+          g++ -std=c++20 -I. -Wall -Wextra \
+            main.cpp \
+            item_3/function_for_3.cpp \
+            item_4/function_for_4.cpp \
+            item_4/Recursion_for_4.cpp \
+            -o program.exe
