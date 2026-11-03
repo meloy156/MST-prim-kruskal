@@ -1,5 +1,6 @@
 #include "method_Prima.h"
-
+#include <climits>
+#include <vector>
 
 Graph_for_Primo method_Prima(const Graph_for_Primo& graph) {
     
