@@ -3,14 +3,16 @@
 #include "Kruskal/Graph_for_Kruskal.h"
 #include "Kruskal/method_Kruskala.h"
 
+#ifdef _WIN32
+#define NOMINMAX
 #include <windows.h>
-
+#endif
 
 int main() {
-
+#ifdef _WIN32
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
-
+#endif
 
     // исходный граф
     const int count_vertex = 8;
