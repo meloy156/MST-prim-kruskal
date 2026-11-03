@@ -15,7 +15,7 @@ void Vertex::to_stream(std::ostream& os) const {
     os << "{Куда, вес}" << std::endl;
 
     for (const AdjEdge& ad : adj) {
-        os << '{' << ad.to << ', ' << ad.weight << "}; ";
+        os << '{' << ad.to << ", " << ad.weight << "}; ";
     }
     os << std::endl;
 }

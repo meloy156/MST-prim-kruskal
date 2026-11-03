@@ -1,7 +1,6 @@
 #include "item_3/function_for_3.h"
 #include "item_4/function_for_4.h"
 
-#include <iostream>
 #include <windows.h>
 
 
