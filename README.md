@@ -1,97 +1,97 @@
 <div align="center">
 
-# Graph Algorithms & Data Structures
+# Алгоритмы на графах и структуры данных
 
-### A C++20 implementation of classic graph algorithms and fundamental data structures
+### Реализация классических алгоритмов на графах и базовых структур данных на C++20
 
-[![Language](https://img.shields.io/badge/Language-C%2B%2B20-00599C?logo=cplusplus&logoColor=white)](https://en.cppreference.com/w/cpp/20)
-[![Algorithms](https://img.shields.io/badge/Algorithms-Prim%20%7C%20Kruskal-7B61FF)](#-minimum-spanning-tree)
-[![Data Structures](https://img.shields.io/badge/Data%20Structures-Graph%20%7C%20DSU%20%7C%20Stack-0A7F5A)](#-data-structures)
+[![Язык](https://img.shields.io/badge/Язык-C%2B%2B20-00599C?logo=cplusplus&logoColor=white)](https://en.cppreference.com/w/cpp/20)
+[![Алгоритмы](https://img.shields.io/badge/Алгоритмы-Прим%20%7C%20Краскал-7B61FF)](#-минимальное-остовное-дерево)
+[![Структуры данных](https://img.shields.io/badge/Структуры-Граф%20%7C%20DSU%20%7C%20Стек-0A7F5A)](#-структуры-данных)
 [![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](.github/workflows/ci.yml)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Лицензия](https://img.shields.io/badge/Лицензия-MIT-green.svg)](LICENSE)
 
-**An educational C++ project focused on graph theory, minimum spanning trees, and classic data structures.**
+**Учебный проект на C++, посвящённый теории графов, минимальным остовным деревьям и классическим структурам данных.**
 
-[Overview](#-overview) · [Algorithms](#-minimum-spanning-tree) · [Architecture](#-project-structure) · [Build](#-getting-started) · [Example](#-example) · [License](#-license)
+[Обзор](#-обзор) · [Алгоритмы](#-минимальное-остовное-дерево) · [Структура](#-структура-проекта) · [Сборка](#-начало-работы) · [Пример](#-пример-работы) · [Лицензия](#-лицензия)
 
 </div>
 
 ---
 
-## Overview
+## Обзор
 
-This repository brings together implementations of fundamental algorithms and data structures in **C++20**. Its central component is a comparative implementation of two approaches to the **Minimum Spanning Tree (MST)** problem: Prim's algorithm and Kruskal's algorithm.
+В репозитории собраны реализации базовых алгоритмов и структур данных на **C++20**. Центральная часть проекта — реализация и сравнение двух подходов к решению задачи поиска **минимального остовного дерева (Minimum Spanning Tree, MST)**: алгоритма Прима и алгоритма Краскала.
 
-The project is organized into independent modules. Each algorithm has its own graph representation and implementation, while Kruskal's algorithm uses a dedicated Disjoint Set Union structure to efficiently maintain connected components.
+Проект разделён на независимые модули. Для каждого алгоритма используется собственное представление графа, а алгоритм Краскала дополнительно использует структуру непересекающихся множеств (Disjoint Set Union, DSU), которая позволяет эффективно отслеживать связные компоненты.
 
-The repository also contains a stack implementation and small applications demonstrating stack operations, bracket validation, and generation of a recursively defined sequence.
+Также в репозитории реализованы стек и несколько небольших приложений, демонстрирующих операции со стеком, проверку правильности скобочной последовательности и формирование рекурсивно заданной последовательности.
 
-### Project highlights
+### Основные возможности
 
-- **Two MST algorithms:** Prim and Kruskal, implemented as separate modules.
-- **Two graph representations:** adjacency lists for Prim and an edge list for Kruskal.
-- **Disjoint Set Union:** path compression and union by rank.
-- **Reusable stack:** a template-based `Stack<T>` backed by `std::deque`.
-- **Practical examples:** bracket-sequence validation and recursive sequence storage.
-- **Modular codebase:** declarations and implementations are separated into header and source files.
-- **Automated builds:** GitHub Actions workflow configured to compile both laboratory modules.
+- **Два алгоритма поиска MST:** Прима и Краскала, реализованные в отдельных модулях.
+- **Два способа представления графа:** списки смежности для алгоритма Прима и список рёбер для алгоритма Краскала.
+- **Структура DSU:** сжатие путей и объединение по рангу.
+- **Универсальный стек:** шаблонный класс `Stack<T>` на основе `std::deque`.
+- **Практические примеры:** проверка скобочных последовательностей и хранение рекурсивной последовательности.
+- **Модульная структура кода:** объявления и реализации разделены на заголовочные и исходные файлы.
+- **Автоматическая сборка:** GitHub Actions настроен для компиляции обоих лабораторных модулей.
 
-> The repository is written in **C++**, using the C++20 language standard. It is not a C implementation.
+> Проект написан на **C++** с использованием стандарта языка C++20.
 
 ---
 
-## Minimum Spanning Tree
+## Минимальное остовное дерево
 
-A **Minimum Spanning Tree** is a subset of edges of a connected, undirected, weighted graph that:
+**Минимальное остовное дерево** — это подмножество рёбер связного неориентированного взвешенного графа, которое:
 
-1. Includes every vertex.
-2. Contains no cycles.
-3. Contains exactly `V - 1` edges.
-4. Has the minimum possible sum of edge weights.
+1. Содержит все вершины графа.
+2. Не содержит циклов.
+3. Содержит ровно `V - 1` ребро.
+4. Имеет минимально возможную сумму весов рёбер.
 
-Here, `V` is the number of vertices and `E` is the number of edges.
+Здесь `V` — количество вершин, а `E` — количество рёбер графа.
 
-MST algorithms are useful in network design, infrastructure planning, clustering, and other problems where all points must be connected at minimum total cost.
+Алгоритмы поиска минимального остовного дерева применяются при проектировании сетей, планировании инфраструктуры, кластеризации и решении других задач, в которых необходимо соединить все объекты с минимальными суммарными затратами.
 
-This project implements two classical greedy algorithms for solving this problem.
+В проекте реализованы два классических жадных алгоритма решения этой задачи.
 
-### 1. Prim's algorithm
+### 1. Алгоритм Прима
 
-**Approach: grow one tree**
+**Идея: последовательное построение одного дерева**
 
-Prim's algorithm starts from a selected vertex and gradually expands a single connected tree.
+Алгоритм Прима начинает работу с выбранной вершины и постепенно расширяет одно связное дерево.
 
-At each iteration, it chooses the minimum-weight edge that connects a vertex already included in the tree to a vertex that has not yet been included.
+На каждой итерации выбирается ребро минимального веса, которое соединяет уже включённую в дерево вершину с вершиной, которая ещё не входит в дерево.
 
-#### How it works
+#### Принцип работы
 
-1. Select the starting vertex (vertex `1` in this implementation).
-2. Initialize the minimum connection cost (`key`) for every vertex to infinity. Set the starting vertex's cost to zero.
-3. Find the not-yet-included vertex with the smallest current `key`.
-4. Add that vertex to the MST.
-5. Examine its adjacent edges and update the best known connection (`key`) and predecessor (`parent`) of each eligible neighbor.
-6. Repeat until all reachable vertices have been processed.
-7. Reconstruct the resulting tree from the `parent` array.
+1. Выбирается начальная вершина (в данной реализации — вершина `1`).
+2. Для каждой вершины задаётся минимальная известная стоимость подключения (`key`), изначально равная бесконечности. Для стартовой вершины устанавливается значение `0`.
+3. Среди ещё не включённых в дерево вершин находится вершина с минимальным значением `key`.
+4. Найденная вершина добавляется в минимальное остовное дерево.
+5. Проверяются её соседние вершины. Если найдено более дешёвое подключение, обновляются значения `key` и `parent`.
+6. Процесс повторяется, пока не будут обработаны все достижимые вершины.
+7. Итоговое дерево восстанавливается с помощью массива `parent`.
 
-#### Data used by the implementation
+#### Используемые структуры данных
 
-| Structure | Purpose |
+| Структура | Назначение |
 |---|---|
-| `key[]` | Stores the cheapest currently known edge for connecting each vertex to the growing tree. |
-| `parent[]` | Stores the predecessor vertex that provides that cheapest connection. |
-| `inMST[]` | Marks vertices that have already been added to the MST. |
-| Adjacency list | Provides the neighbors and edge weights of a vertex. |
+| `key[]` | Хранит минимальный из известных весов рёбер, которыми можно подключить каждую вершину к строящемуся дереву. |
+| `parent[]` | Хранит предыдущую вершину, через которую обеспечивается это подключение. |
+| `inMST[]` | Отмечает вершины, уже включённые в минимальное остовное дерево. |
+| Список смежности | Хранит соседей вершины и веса соответствующих рёбер. |
 
-#### Complexity
+#### Вычислительная сложность
 
-The implementation searches linearly for the next minimum-key vertex and uses adjacency lists to inspect neighbors.
+В данной реализации следующая вершина с минимальным значением `key` ищется линейным перебором, а для просмотра соседей используются списки смежности.
 
-- **Time:** `O(V² + E)`, commonly written as `O(V²)` for a connected simple graph.
-- **Auxiliary space:** `O(V)` for the algorithm's working arrays, excluding the graph and resulting tree.
+- **Временная сложность:** `O(V² + E)`. Для связного простого графа её обычно записывают как `O(V²)`.
+- **Дополнительная память:** `O(V)` для рабочих массивов алгоритма, без учёта самого графа и результирующего дерева.
 
-This implementation uses a linear minimum search rather than a binary heap or priority queue.
+В реализации используется линейный поиск минимального значения, а не бинарная куча или очередь с приоритетами.
 
-**Source files:**
+**Файлы реализации:**
 - `laba_4/Primo/Graph_for_Primo.h`
 - `laba_4/Primo/Graph_for_Primo.cpp`
 - `laba_4/Primo/method_Prima.h`
@@ -99,48 +99,48 @@ This implementation uses a linear minimum search rather than a binary heap or pr
 
 ---
 
-### 2. Kruskal's algorithm
+### 2. Алгоритм Краскала
 
-**Approach: build a forest and merge components**
+**Идея: построение леса и объединение компонент**
 
-Kruskal's algorithm considers graph edges in ascending order of weight. It adds an edge if doing so does not create a cycle.
+Алгоритм Краскала рассматривает рёбра графа в порядке возрастания их веса. Ребро добавляется в результат, только если его добавление не создаёт цикл.
 
-To check whether two endpoints are already connected, the implementation uses a **Disjoint Set Union (DSU)** data structure, also known as Union-Find.
+Чтобы определить, связаны ли уже две вершины, в реализации используется структура **непересекающихся множеств (Disjoint Set Union, DSU)**, также известная как Union-Find.
 
-#### How it works
+#### Принцип работы
 
-1. Copy the graph's edge list.
-2. Sort all edges by non-decreasing weight.
-3. Initialize DSU so that every vertex belongs to its own component.
-4. Iterate over the sorted edges:
-   - Find the representative of each endpoint's component.
-   - If the representatives are different, merge the components.
-   - Add the edge to the resulting spanning tree.
-   - If the result contains `V - 1` edges, stop.
-5. Return the resulting graph.
+1. Создаётся копия списка рёбер графа.
+2. Все рёбра сортируются по неубыванию веса.
+3. Инициализируется DSU: каждая вершина изначально принадлежит собственной компоненте.
+4. Последовательно рассматриваются отсортированные рёбра:
+   - Для каждой из двух вершин ребра находится представитель её компоненты.
+   - Если представители различаются, компоненты объединяются.
+   - Ребро добавляется в результирующее остовное дерево.
+   - Если результат содержит `V - 1` ребро, алгоритм завершает работу.
+5. Возвращается построенный граф.
 
-#### Disjoint Set Union (DSU)
+#### Структура DSU (Disjoint Set Union)
 
-The DSU implementation provides two core operations:
+Реализация DSU предоставляет две основные операции:
 
-| Operation | Description |
+| Операция | Описание |
 |---|---|
-| `find(x)` | Finds the representative of the component containing vertex `x`. |
-| `unite(a, b)` | Merges the components containing `a` and `b`. Returns `false` if they are already connected. |
+| `find(x)` | Находит представителя компоненты, которой принадлежит вершина `x`. |
+| `unite(a, b)` | Объединяет компоненты, содержащие вершины `a` и `b`. Возвращает `false`, если вершины уже находятся в одной компоненте. |
 
-Two optimizations make these operations efficient:
+Для повышения эффективности используются два оптимизационных приёма:
 
-- **Path compression:** during `find`, visited vertices are connected directly to the representative.
-- **Union by rank:** the root of the shallower tree is attached to the root of the deeper tree.
+- **Сжатие путей (Path Compression):** во время выполнения `find` посещённые вершины связываются непосредственно с представителем компоненты.
+- **Объединение по рангу (Union by Rank):** корень дерева меньшего ранга присоединяется к корню дерева большего ранга.
 
-Together, these optimizations provide an amortized complexity of `O(α(V))` per DSU operation, where `α` is the inverse Ackermann function.
+Вместе эти оптимизации обеспечивают амортизированную сложность `O(α(V))` для одной операции DSU, где `α` — обратная функция Аккермана.
 
-#### Complexity
+#### Вычислительная сложность
 
-- **Time:** `O(E log E + E α(V))`, conventionally simplified to `O(E log E)`.
-- **Auxiliary space:** `O(V + E)` for DSU, the copied edge list, and the resulting graph.
+- **Временная сложность:** `O(E log E + E α(V))`, обычно упрощается до `O(E log E)`.
+- **Дополнительная память:** `O(V + E)` для DSU, копии списка рёбер и результирующего графа.
 
-**Source files:**
+**Файлы реализации:**
 - `laba_4/Kruskal/Graph_for_Kruskal.h`
 - `laba_4/Kruskal/Graph_for_Kruskal.cpp`
 - `laba_4/Kruskal/method_Kruskala.h`
@@ -150,145 +150,145 @@ Together, these optimizations provide an amortized complexity of `O(α(V))` per 
 
 ---
 
-### Prim vs. Kruskal
+### Сравнение алгоритмов Прима и Краскала
 
-Both algorithms produce a minimum spanning tree, but they approach the problem differently.
+Оба алгоритма находят минимальное остовное дерево, но используют разные подходы.
 
-| Characteristic | Prim | Kruskal |
+| Характеристика | Прим | Краскал |
 |---|---|---|
-| Main strategy | Grows one tree | Merges connected components |
-| Starting point | A selected vertex | No starting vertex required |
-| Main graph representation | Adjacency list | Edge list |
-| Main supporting structures | `key`, `parent`, `inMST` | DSU / Union-Find |
-| Edge selection | Cheapest edge leaving the current tree | Globally cheapest remaining edge |
-| Time complexity in this project | `O(V² + E)` | `O(E log E)` |
-| Typical use case | Often attractive for dense graphs | Often attractive for sparse graphs |
+| Основная стратегия | Постепенно расширяет одно дерево | Объединяет связные компоненты |
+| Начальная точка | Выбранная вершина | Не требуется |
+| Основное представление графа | Список смежности | Список рёбер |
+| Вспомогательные структуры | `key`, `parent`, `inMST` | DSU / Union-Find |
+| Выбор ребра | Минимальное ребро, выходящее из текущего дерева | Минимальное из оставшихся рёбер всего графа |
+| Сложность в данном проекте | `O(V² + E)` | `O(E log E)` |
+| Типичный сценарий применения | Часто удобен для плотных графов | Часто удобен для разреженных графов |
 
-The algorithms may return different edge sets when multiple MSTs have the same minimum weight. Their **total MST weights**, however, must agree for the same connected graph.
+Если у графа существует несколько минимальных остовных деревьев с одинаковым суммарным весом, алгоритмы могут выбрать разные наборы рёбер. Однако **суммарный вес** полученных минимальных остовных деревьев для одного и того же связного графа должен совпадать.
 
 ---
 
-## Data structures
+## Структуры данных
 
-### Graph representation for Prim
+### Представление графа для алгоритма Прима
 
-`Graph_for_Primo` stores vertices and their adjacency lists.
+`Graph_for_Primo` хранит вершины и списки смежности для каждой из них.
 
-Each adjacency entry is represented by `AdjEdge`, which contains:
-- `to` — the neighboring vertex;
-- `weight` — the edge weight.
+Каждая запись в списке смежности представлена структурой `AdjEdge`, которая содержит:
+- `to` — соседнюю вершину;
+- `weight` — вес ребра.
 
-Adding an edge creates entries in both endpoint adjacency lists, so the graph is undirected.
+При добавлении ребра записи создаются в списках смежности обеих вершин, поэтому граф является неориентированным.
 
-The class also provides methods to access neighbors, count vertices and edges, print the graph, and calculate the total weight of its edges.
+Класс также предоставляет методы для получения соседей вершины, подсчёта количества вершин и рёбер, вывода графа и вычисления суммарного веса его рёбер.
 
-### Graph representation for Kruskal
+### Представление графа для алгоритма Краскала
 
-`Graph_for_Kruskal` stores graph edges in a `std::vector<Edge>`.
+`Graph_for_Kruskal` хранит рёбра графа в `std::vector<Edge>`.
 
-Each `Edge` contains:
-- `to_vertex` — the first endpoint;
-- `end_vertex` — the second endpoint;
-- `weight` — the edge weight.
+Каждая структура `Edge` содержит:
+- `to_vertex` — первую вершину ребра;
+- `end_vertex` — вторую вершину ребра;
+- `weight` — вес ребра.
 
-This representation makes it straightforward to sort edges before running Kruskal's algorithm.
+Такое представление удобно для сортировки рёбер перед запуском алгоритма Краскала.
 
-### Generic stack
+### Шаблонный стек
 
-The `Stack<T>` class is a template-based stack backed by `std::deque<T>`.
+Класс `Stack<T>` — шаблонная реализация стека на основе `std::deque<T>`.
 
-Its interface includes:
+Интерфейс класса включает следующие методы:
 
-| Method | Description |
+| Метод | Описание |
 |---|---|
-| `PUSH(value)` | Adds an element to the stack. |
-| `POP()` | Removes and returns the top element through `Result_Pop<T>`. |
-| `size()` | Returns the number of stored elements. |
-| `to_stream()` | Prints the stack contents. |
+| `PUSH(value)` | Добавляет элемент в стек. |
+| `POP()` | Удаляет и возвращает верхний элемент через `Result_Pop<T>`. |
+| `size()` | Возвращает количество элементов в стеке. |
+| `to_stream()` | Выводит содержимое стека. |
 
-`Result_Pop<T>` carries both the returned value and a status code indicating whether the operation succeeded.
+`Result_Pop<T>` хранит возвращаемое значение и код состояния, показывающий, успешно ли выполнена операция.
 
-Implementation files:
+Файлы реализации:
 - `laba_3/Stack_FIFO/Stackcheck.h`
 - `laba_3/Stack_FIFO/Stackcheck.tpp`
 
 ---
 
-## Additional exercises
+## Дополнительные задания
 
-The repository includes two applications built around the stack data structure.
+В репозитории есть два приложения, демонстрирующих использование структуры данных «стек».
 
-### Bracket sequence validation
+### Проверка скобочной последовательности
 
-The `check_for_3()` function checks whether a string contains correctly balanced round parentheses.
+Функция `check_for_3()` проверяет, правильно ли расставлены круглые скобки в строке.
 
-It scans the input from left to right:
-- On `(`, it pushes an opening bracket onto the stack.
-- On `)`, it checks whether an opening bracket is available and removes it.
-- If a closing bracket appears when the stack is empty, the sequence is invalid.
-- After processing the entire string, the sequence is valid only if the stack is empty.
+Алгоритм проходит по входной строке слева направо:
+- При встрече `(` открывающая скобка помещается в стек.
+- При встрече `)` проверяется, есть ли в стеке открывающая скобка; если есть, она удаляется.
+- Если закрывающая скобка встретилась при пустом стеке, последовательность некорректна.
+- После обработки всей строки последовательность считается правильной только в том случае, если стек пуст.
 
-The function checks round parentheses `(` and `)`; other characters are ignored.
+Функция проверяет только круглые скобки `(` и `)`. Остальные символы игнорируются.
 
-### Recursive sequence and stack operations
+### Рекурсивная последовательность и операции со стеком
 
-The `Recursion_for_4` class stores values generated by the recursively defined function:
+Класс `Recursion_for_4` хранит значения, полученные из рекуррентно заданной функции:
 
 `f(n) = 2^(n + 1) / 3^(n - 1)`
 
-The class supports:
-- Initializing a stack with a specified number of sequence values.
-- Adding the next value.
-- Adding multiple subsequent values.
-- Reading the current number of stored elements.
-- Printing the stack and the defining function.
+Класс поддерживает следующие операции:
+- Инициализация стека заданным количеством элементов последовательности.
+- Добавление следующего значения.
+- Добавление нескольких следующих значений.
+- Получение текущего количества сохранённых элементов.
+- Вывод стека и функции, задающей последовательность.
 
-These exercises demonstrate how a reusable stack can support different application-level tasks.
+Эти задания показывают, как универсальный стек можно использовать для решения различных прикладных задач.
 
 ---
 
-## Project structure
+## Структура проекта
 
 ```text
 LABA_2/
 │
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                  # GitHub Actions build workflow
+│       └── ci.yml                  # Сценарий автоматической сборки GitHub Actions
 │
 ├── laba_3/
-│   ├── main.cpp                    # Entry point for laboratory 3
+│   ├── main.cpp                    # Точка входа лабораторной работы № 3
 │   │
 │   ├── Stack_FIFO/
-│   │   ├── Stackcheck.h            # Generic stack declaration
-│   │   └── Stackcheck.tpp          # Template implementation
+│   │   ├── Stackcheck.h            # Объявление шаблонного стека
+│   │   └── Stackcheck.tpp          # Реализация шаблона
 │   │
 │   ├── item_3/
 │   │   ├── function_for_3.h
-│   │   └── function_for_3.cpp      # Bracket sequence validation
+│   │   └── function_for_3.cpp      # Проверка скобочной последовательности
 │   │
 │   └── item_4/
 │       ├── function_for_4.h
 │       ├── function_for_4.cpp
 │       ├── Recursion_for_4.h
-│       └── Recursion_for_4.cpp     # Recursive sequence and stack
+│       └── Recursion_for_4.cpp     # Рекурсивная последовательность и стек
 │
 ├── laba_4/
-│   ├── main_for_4.cpp              # MST demonstration and comparison
+│   ├── main_for_4.cpp              # Демонстрация алгоритмов поиска MST
 │   │
 │   ├── Primo/
 │   │   ├── Graph_for_Primo.h
-│   │   ├── Graph_for_Primo.cpp     # Adjacency-list graph
+│   │   ├── Graph_for_Primo.cpp     # Граф на основе списков смежности
 │   │   ├── method_Prima.h
-│   │   └── method_Prima.cpp        # Prim's algorithm
+│   │   └── method_Prima.cpp        # Алгоритм Прима
 │   │
 │   └── Kruskal/
 │       ├── Graph_for_Kruskal.h
-│       ├── Graph_for_Kruskal.cpp   # Edge-list graph
+│       ├── Graph_for_Kruskal.cpp   # Граф на основе списка рёбер
 │       ├── method_Kruskala.h
-│       ├── method_Kruskala.cpp     # Kruskal's algorithm
+│       ├── method_Kruskala.cpp     # Алгоритм Краскала
 │       ├── DSU.h
-│       └── DSU.cpp                 # Disjoint Set Union
+│       └── DSU.cpp                 # Структура непересекающихся множеств
 │
 ├── .gitignore
 ├── LICENSE
@@ -297,30 +297,30 @@ LABA_2/
 
 ---
 
-## Getting started
+## Начало работы
 
-### Requirements
+### Требования
 
-To build the project, you need:
+Для сборки проекта понадобятся:
 
-- A C++ compiler with C++20 support (for example, GCC or MinGW-w64).
+- Компилятор C++ с поддержкой стандарта C++20 (например, GCC или MinGW-w64).
 - Git.
-- A terminal or an IDE configured for C++ development.
+- Терминал или IDE, настроенная для разработки на C++.
 
-The repository includes a GitHub Actions workflow that builds the laboratory modules on Ubuntu.
+В репозитории также настроен сценарий GitHub Actions, который собирает лабораторные модули в Ubuntu.
 
-### Clone the repository
+### Клонирование репозитория
 
 ```bash
 git clone <YOUR_REPOSITORY_URL>
 cd LABA_2
 ```
 
-Replace `<YOUR_REPOSITORY_URL>` with the URL of your GitHub repository.
+Замените `<YOUR_REPOSITORY_URL>` на URL вашего GitHub-репозитория.
 
-### Build laboratory 4 — Prim and Kruskal
+### Сборка лабораторной работы № 4 — алгоритмы Прима и Краскала
 
-From the repository root:
+Выполняйте команды из корневой папки репозитория:
 
 ```bash
 cd laba_4
@@ -335,23 +335,23 @@ g++ -std=c++20 -Wall -Wextra -I. -IPrimo -IKruskal \
     -o mst_demo
 ```
 
-Run on Linux:
+Запуск в Linux:
 
 ```bash
 ./mst_demo
 ```
 
-Run on Windows:
+Запуск в Windows:
 
 ```powershell
 .\mst_demo.exe
 ```
 
-For Windows, name the output file `mst_demo.exe` when compiling with MinGW-w64.
+При компиляции в Windows с помощью MinGW-w64 укажите имя выходного файла `mst_demo.exe`.
 
-### Build laboratory 3 — stack exercises
+### Сборка лабораторной работы № 3 — задания со стеком
 
-From the repository root:
+Выполняйте команды из корневой папки репозитория:
 
 ```bash
 cd laba_3
@@ -364,25 +364,25 @@ g++ -std=c++20 -Wall -Wextra -I. \
     -o stack_demo
 ```
 
-Run on Linux:
+Запуск в Linux:
 
 ```bash
 ./stack_demo
 ```
 
-Run on Windows:
+Запуск в Windows:
 
 ```powershell
 .\stack_demo.exe
 ```
 
-**Compiler note:** laboratory 3 includes `<format>`. Use a standard library implementation that supports C++20 `std::format` (for example, a sufficiently recent GCC/libstdc++ or MSVC toolchain).
+**Примечание о компиляторе:** в лабораторной работе № 3 используется заголовок `<format>`. Нужна реализация стандартной библиотеки с поддержкой `std::format` из C++20 (например, достаточно свежая версия GCC/libstdc++ или MSVC).
 
 ---
 
-## Example
+## Пример работы
 
-The MST demonstration in `laba_4/main_for_4.cpp` creates an undirected weighted graph with **8 vertices and 12 edges**:
+В демонстрационной программе `laba_4/main_for_4.cpp` создаётся неориентированный взвешенный граф из **8 вершин и 12 рёбер**:
 
 ```text
 (1, 2,  2)    (1, 5,  3)    (1, 6, 10)
@@ -394,68 +394,70 @@ The MST demonstration in `laba_4/main_for_4.cpp` creates an undirected weighted 
 (7, 8, 10)
 ```
 
-The program:
-1. Builds the graph for Prim's algorithm.
-2. Calculates and prints the resulting spanning tree.
-3. Builds the graph for Kruskal's algorithm.
-4. Calculates and prints its selected edges.
-5. Compares the total weights of both results.
+Программа выполняет следующие действия:
 
-For this input, both algorithms produce a minimum spanning tree with **7 edges** and a total weight of:
+1. Создаёт граф для алгоритма Прима.
+2. Строит и выводит полученное остовное дерево.
+3. Создаёт граф для алгоритма Краскала.
+4. Находит и выводит выбранные рёбра.
+5. Сравнивает суммарные веса результатов обоих алгоритмов.
+
+Для этого входного графа оба алгоритма строят минимальное остовное дерево из **7 рёбер** с суммарным весом:
 
 ```text
-Prim:    55
-Kruskal: 55
+Прим:    55
+Краскал: 55
 ```
 
-The exact selected edges can differ in graphs with multiple minimum spanning trees; the total minimum weight remains the same.
+Если у графа существует несколько минимальных остовных деревьев, конкретные выбранные рёбра могут различаться. При этом минимальный суммарный вес останется одинаковым.
 
 ---
 
-## Continuous integration
+## Непрерывная интеграция (CI)
 
-The repository contains a GitHub Actions workflow at:
+В репозитории находится сценарий GitHub Actions:
 
 `.github/workflows/ci.yml`
 
-The workflow is triggered on:
-- `push`;
-- `pull_request`.
+Сценарий запускается при следующих событиях:
+- `push` — отправка изменений в репозиторий;
+- `pull_request` — создание или обновление запроса на слияние.
 
-It defines separate Ubuntu build jobs for:
-- **Laboratory 4:** graph representations, Prim, Kruskal, and DSU.
-- **Laboratory 3:** stack implementation and the two stack-based exercises (when the directory is present).
+Для сборки предусмотрены отдельные задания в Ubuntu:
 
-This provides an automated compilation check when changes are pushed or submitted through a pull request.
+- **Лабораторная работа № 4:** представления графов, алгоритмы Прима и Краскала, структура DSU.
+- **Лабораторная работа № 3:** реализация стека и два задания на его основе (если соответствующая папка присутствует).
 
----
-
-## Scope and assumptions
-
-The current MST implementations are designed for **undirected weighted graphs with vertices numbered from `1` to `V`**.
-
-A few implementation details are worth keeping in mind:
-
-- The demonstration uses a connected graph with positive integer weights.
-- Prim starts from vertex `1`.
-- Kruskal sorts edges by weight and uses DSU to reject cycle-forming edges.
-- If the input graph is disconnected, the algorithms cannot produce a spanning tree covering all vertices; the current functions do not expose a separate connectivity-status result.
-- The graph classes expect valid vertex indices when edges are added.
-
-These details describe the current implementation and help define the assumptions under which the examples should be used.
+Таким образом, при отправке изменений или создании pull request GitHub Actions автоматически проверяет, что лабораторные модули компилируются.
 
 ---
 
-## License
+## Ограничения и допущения
 
-This project is distributed under the **MIT License**. You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the conditions of the license.
+Текущие реализации алгоритмов поиска MST рассчитаны на **неориентированные взвешенные графы с нумерацией вершин от `1` до `V`**.
 
-See [`LICENSE`](LICENSE) for the full text.
+Важно учитывать несколько особенностей реализации:
+
+- В демонстрационном примере используется связный граф с положительными целочисленными весами.
+- Алгоритм Прима начинает работу с вершины `1`.
+- Алгоритм Краскала сортирует рёбра по весу и использует DSU, чтобы не добавлять рёбра, образующие циклы.
+- Если входной граф несвязный, построить остовное дерево, охватывающее все вершины, невозможно. Текущие функции не возвращают отдельный статус связности графа.
+- При добавлении рёбер классы графов ожидают корректные индексы вершин.
+
+Эти особенности описывают текущее состояние реализации и определяют условия, при которых примеры можно использовать.
+
+---
+
+## Лицензия
+
+Проект распространяется на условиях лицензии **MIT License**. Она разрешает использовать, копировать, изменять, объединять, публиковать и распространять программное обеспечение, а также продавать его копии при соблюдении условий лицензии.
+
+Полный текст лицензии находится в файле [`LICENSE`](LICENSE).
 
 ---
 
 <div align="center">
 
-**Built with C++20 · Algorithms · Data Structures · Graph Theory**
+**Создано с использованием C++20 · Алгоритмы · Структуры данных · Теория графов**
 
 </div>
